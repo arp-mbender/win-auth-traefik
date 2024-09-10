@@ -1,0 +1,26 @@
+services:
+  traefik:
+    image: traefik:v2.10-windowsservercore-1809
+    ports:
+      - 443:443
+      - 80:80
+      - 8080:8080
+    container_name: traefik
+    command:
+      - "--log.level=DEBUG"
+      - "--providers.file.directory=c:\\services"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--api.insecure=true"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=test@test.com"
+    volumes:
+      - .\\services-traefik210:c:/services
+
+  backend:
+    build: .
+    container_name: backend
+    expose:
+      - 80
+      - 443

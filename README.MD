@@ -18,7 +18,8 @@ self-signed certificate instead.
 
 # Running app by itself
 
-The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username after navigating to `http://localhost` or `https://localhost`, if ran by itself.
+The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username 
+after navigating to `http://localhost` or `https://localhost`, if ran by itself.
 
 **The available username for testing is `test`. There is no password (blank).**
 
@@ -31,13 +32,20 @@ then start the image using
 docker run -p 80:80 -p 443:443 <mytag>
 ```
 
-# Running with Traefik
-
-To run this all thay should be required is to run:
+# Running with Traefik 3.11
+Run the `compose` command via:
 ```
 docker compose up -d
 ```
 from the project folder.
+
+# Running with Traefik 2.10
+It seems Traefik 2.10 is able to handle NTLM login correctly. To run this version run the `compose` command 
+and specify the dedicated `yml` file via:
+```
+docker compose -f docker-compose-traefik210.yml up -d
+```
+from the project directory.
 
 ## Assumptions
 
