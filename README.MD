@@ -18,8 +18,7 @@ self-signed certificate instead.
 
 # Running app by itself
 
-The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username 
-after navigating to `http://localhost` or `https://localhost`, if ran by itself.
+The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username after navigating to `http://localhost/data` or `https://localhost/data`, if ran by itself.
 
 **The available username for testing is `test`. There is no password (blank).**
 
