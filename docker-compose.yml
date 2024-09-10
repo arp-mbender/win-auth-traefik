@@ -8,9 +8,6 @@ services:
     container_name: traefik
     command:
       - "--log.level=DEBUG"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.endpoint=npipe:////./pipe/docker_engine"
       - "--providers.file.directory=c:\\services"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
@@ -19,9 +16,6 @@ services:
       - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.myresolver.acme.email=test@test.com"
     volumes:
-      - type: npipe
-        source: \\.\pipe\docker_engine
-        target: \\.\pipe\docker_engine
       - .\\services:c:/services
 
   backend:
@@ -29,3 +23,4 @@ services:
     container_name: backend
     expose:
       - 80
+      - 443

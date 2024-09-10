@@ -12,7 +12,7 @@ http:
        serversTransport: backend
        passHostHeader: false
        servers:
-       - url: http://backend
+       - url: https://backend
  serversTransports:
    backend:
      disableHTTP2: true

@@ -9,9 +9,16 @@ around a Windows image.
 it might NOT work on a Windows 11 machine, as Windows images are very picky when it comes
 to Docker hosts.***
 
+## A note on certificates
+This sample app uses no publicly trusted certificates for HTTPS. The base image generates a
+self-signed certificate while Traefik, described in the
+[Running with Traefik](#running-with-traefik) section, uses a staging certificate resolver which
+will never yield a certificate in the current setup which forces Traefik to use an internal,
+self-signed certificate instead.
+
 # Running app by itself
 
-The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username after navigating to the `http://localhost:80`, if ran by itself.
+The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username after navigating to `http://localhost` or `https://localhost`, if ran by itself.
 
 **The available username for testing is `test`. There is no password (blank).**
 
@@ -21,7 +28,7 @@ docker build -t <mytag> .
 ```
 then start the image using
 ```
-docker run -p 80:80 <mytag>
+docker run -p 80:80 -p 443:443 <mytag>
 ```
 
 # Running with Traefik
