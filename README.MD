@@ -18,7 +18,8 @@ self-signed certificate instead.
 
 # Running app by itself
 
-The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current username after navigating to `http://localhost/data` or `https://localhost/data`, if ran by itself.
+The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current 
+username after navigating to `http://localhost/data` or `https://localhost/data`, if ran by itself.
 
 **The available username for testing is `test`. There is no password (blank).**
 
@@ -30,6 +31,10 @@ then start the image using
 ```
 docker run -p 80:80 -p 443:443 <mytag>
 ```
+
+# Running the IIS app
+The IIS-based app will be built similarly to [.NET Core](#running-app-by-itself), however the `docker build`
+operation must be executed from the `IIS` project folder. The IIS app does NOT expose a 443 port at this time.
 
 # Running with Traefik 3.11
 Run the `compose` command via:
@@ -48,6 +53,8 @@ from the project directory.
 
 ## Assumptions
 
-The file `./services/backend.yml` contains the Traefik definition for the backend test service.
-Note that the `Host` is using `test.local`, and this is expected to be a valid `HOSTS` file or
+The files `./services/backend_core.yml` and `./services/backend_iis.yml` contain the Traefik definitions for the
+two backend test services (.NET Core based and IIS-based).
+
+Note that the `Host` is using `test.local` and `test_iis.local`, and this is expected to be a valid `HOSTS` file or
 DNS entry. Obviously this can be changed for testing of various scenarios.
