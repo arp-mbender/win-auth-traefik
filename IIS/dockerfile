@@ -1,0 +1,15 @@
+# escape=`
+FROM mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
+
+RUN Install-WindowsFeature Web-Windows-Auth
+
+    # Update Authentication
+RUN  Set-WebConfigurationProperty -filter /system.WebServer/security/authentication/AnonymousAuthentication -name enabled -value false
+RUN  Set-WebConfigurationProperty -filter /system.WebServer/security/authentication/windowsAuthentication -name enabled -value true
+
+RUN net user test /ADD
+RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
+WORKDIR /inetpub/wwwroot
+
+COPY content/ .

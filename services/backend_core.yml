@@ -1,19 +1,19 @@
 http:
  routers:
-   backend:
+   backend_dot:
      rule: "Host(`test.local`)"
-     service: backend
-     entrypoints: websecure
+     service: backend_dot
+     entrypoints: websecure, web
      tls:
        certResolver: myresolver
  services:
-   backend:
+   backend_dot:
      loadBalancer:
-       serversTransport: backend
+       serversTransport: backend_dot
        passHostHeader: false
        servers:
-       - url: https://backend
+       - url: http://backend_core
  serversTransports:
-   backend:
+   backend_dot:
      disableHTTP2: true
      insecureSkipVerify: true

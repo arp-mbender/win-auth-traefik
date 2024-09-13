@@ -9,6 +9,7 @@ services:
     command:
       - "--log.level=DEBUG"
       - "--providers.file.directory=c:\\services"
+      - "--providers.file.watch=false"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
       - "--api.insecure=true"
@@ -18,9 +19,14 @@ services:
     volumes:
       - .\\services:c:/services
 
-  backend:
+  backend_core:
     build: .
-    container_name: backend
+    container_name: backend_core
     expose:
       - 80
-      - 443
+
+  backend_iis:
+    build: ./IIS
+    container_name: backend_iis
+    expose:
+      - 80

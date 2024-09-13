@@ -1,0 +1,19 @@
+http:
+ routers:
+   backend_iis:
+     rule: "Host(`test_iis.local`)"
+     service: backend_iis
+     entrypoints: websecure, web
+     tls:
+       certResolver: myresolver
+ services:
+   backend_iis:
+     loadBalancer:
+       serversTransport: backend_iis
+       passHostHeader: false
+       servers:
+       - url: http://backend_iis
+ serversTransports:
+   backend_iis:
+     disableHTTP2: true
+     insecureSkipVerify: true
