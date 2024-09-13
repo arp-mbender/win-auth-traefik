@@ -16,7 +16,7 @@ self-signed certificate while Traefik, described in the
 will never yield a certificate in the current setup which forces Traefik to use an internal,
 self-signed certificate instead.
 
-# Running app by itself
+# Running the .NET Core app by itself
 
 The small ASP .NET Core applicaiton will respond with the current UTC date-time and the current 
 username after navigating to `http://localhost/data` or `https://localhost/data`, if ran by itself.
@@ -32,9 +32,14 @@ then start the image using
 docker run -p 80:80 -p 443:443 <mytag>
 ```
 
-# Running the IIS app
-The IIS-based app will be built similarly to [.NET Core](#running-app-by-itself), however the `docker build`
-operation must be executed from the `IIS` project folder. The IIS app does NOT expose a 443 port at this time.
+# Running the IIS app by itself
+The IIS-based app will be built similarly to [.NET Core](#running-the-net-core-app-by-itself), however the `docker build`
+operation must be executed from the `IIS` project folder.
+
+Note: 
+- the IIS app does NOT expose a 443 port at this time
+- the IIS app is simpler and contains just a "Hello world" index. It does NOT contain a `/data` 
+- the IIS app also expects a `test` useraname with no password
 
 # Running with Traefik 3.11
 Run the `compose` command via:
